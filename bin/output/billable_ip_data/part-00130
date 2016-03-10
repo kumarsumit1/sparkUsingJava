@@ -1,0 +1,2 @@
+{"acct_session_id":"8F8B8974","nas_ip_address":"68.28.177.85","acct_input_octets":"28","acct_output_octets":"0","acct_terminate_cause":"PPP-Termination","acct_start_time":"2015-07-24 16:45:08","acct_stop_time":"2015-07-24 16:59:06","mdn":"7635000791","billing_period_id":"100"}
+{"acct_session_id":"068A1CC2","nas_ip_address":"68.28.57.85","acct_input_octets":"2282","acct_output_octets":"1632","acct_terminate_cause":"Unknown","acct_start_time":"2015-07-31 16:50:00","acct_stop_time":"2015-07-31 16:51:23","mdn":"7632662628","billing_period_id":"100"}
