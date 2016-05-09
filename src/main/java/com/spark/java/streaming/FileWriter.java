@@ -18,7 +18,7 @@ public class FileWriter
         Time time)
     {
         if (rdd.count() <= 0) return null;
-        String path = Properties.getString("rts.spark.hdfs_output_file") +
+        String path = Properties.getString("rtm.spark.hdfs_output_file") +
                       "_" +
                       time.milliseconds();
         rdd.saveAsTextFile(path);

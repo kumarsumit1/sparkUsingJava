@@ -11,9 +11,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 public class HTTPNotifierFunction
-    implements Function<JavaRDD<Tuple5<Long, String, Float, Float, String>>,
-                        Void>
-{
+    implements Function<JavaRDD<Tuple5<Long, String, Float, Float, String>>,Void>{
     private static final long serialVersionUID = 42l;
 
     @Override
