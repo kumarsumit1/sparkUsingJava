@@ -3,6 +3,8 @@ package com.spark.java.dataframe;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -15,9 +17,13 @@ import org.apache.spark.sql.types.DataTypes;
 import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
 
+
 public class SparkSQLJoin {
 
 	public static void main(String[] args) {
+		Logger.getLogger("org").setLevel(Level.OFF);
+	    Logger.getLogger("akka").setLevel(Level.OFF);
+	    
 		boolean runLocal=true;
 		SparkConf sparkConfig=new SparkConf();
 		 if (runLocal) {
