@@ -1,15 +1,19 @@
 package com.spark.java.dataframe;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.DataFrame;
 import org.apache.spark.sql.SQLContext;
 
+
 public class DataProcessor {
 
 
 	public static void main(String[] args) {
-		
+		Logger.getLogger("org").setLevel(Level.ERROR);
+	    Logger.getLogger("akka").setLevel(Level.ERROR);
 		//String filePath="E://tested//sample.xml";
 		String filePath="input/people.json";
 		//String filePath="input/sales";
@@ -42,8 +46,18 @@ public class DataProcessor {
 		
 
       asset.printSchema();
-  	asset.registerTempTable("asset_table");
-  	sqlContext.cacheTable("asset_table");
+      
+        System.out.println(asset.schema().simpleString());
+  //	asset.registerTempTable("asset_table");
+  //	sqlContext.cacheTable("asset_table");
+      DataFrame flatRec=asset.select(asset.col( "name").as("NAMES"),org.apache.spark.sql.functions.explode(asset.col("schools")).as("schools_flat") );
+      
+      flatRec.show();
+      
+      DataFrame indvFlatRec=flatRec.select(flatRec.col("NAMES").as("NAM"),flatRec.col("schools_flat").getField("sname").as("schoolName"),flatRec.col("schools_flat").getField("year").as("schoolYear"));
+    		  
+     indvFlatRec.show();		  
+    		
 
 	}
 }
