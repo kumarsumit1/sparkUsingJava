@@ -6,6 +6,8 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.DataFrame;
 import org.apache.spark.sql.SQLContext;
+import org.apache.spark.sql.expressions.Window;
+import org.apache.spark.sql.expressions.WindowSpec;
 
 
 public class DataProcessor {
@@ -56,8 +58,13 @@ public class DataProcessor {
       
       DataFrame indvFlatRec=flatRec.select(flatRec.col("NAMES").as("NAM"),flatRec.col("schools_flat").getField("sname").as("schoolName"),flatRec.col("schools_flat").getField("year").as("schoolYear"));
     		  
-     indvFlatRec.show();		  
-    		
+     indvFlatRec.show();	
+     
+     //Windows function
+     WindowSpec winSpec= Window.partitionBy("schoolName").orderBy("schoolYear").rowsBetween(-1, 1);
+     
+    
+     //Dataset
 
 	}
 }
