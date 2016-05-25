@@ -32,7 +32,9 @@ public class DataProcessor {
 			formatClass="com.databricks.spark.xml";
 			asset = sqlContext.read().format(formatClass).option("rowTag", "ASSET").load(filePath);
 		}else if(format.trim().toLowerCase().equalsIgnoreCase("json")){
-			asset = sqlContext.read().json(filePath);
+			formatClass="org.apache.spark.sql.json";
+			//asset = sqlContext.read().json(filePath);
+			asset = sqlContext.read().format(formatClass).load(filePath);
 		}else if(format.trim().toLowerCase().equalsIgnoreCase("csv")){
 			formatClass="com.databricks.spark.csv";
 			asset = sqlContext.read().format(formatClass) .option("header", "true") // Use first line of all files as header
@@ -58,10 +60,11 @@ public class DataProcessor {
       
       DataFrame indvFlatRec=flatRec.select(flatRec.col("NAMES").as("NAM"),flatRec.col("schools_flat").getField("sname").as("schoolName"),flatRec.col("schools_flat").getField("year").as("schoolYear"));
     		  
-     indvFlatRec.show();	
-     
+    // indvFlatRec.;
+     indvFlatRec.show();
      //Windows function
      WindowSpec winSpec= Window.partitionBy("schoolName").orderBy("schoolYear").rowsBetween(-1, 1);
+     indvFlatRec.select(indvFlatRec.col("NAM"), indvFlatRec.col("schoolName"), org.apache.spark.sql.functions.rowNumber().over(winSpec).alias("rn")).explain();;
      
     
      //Dataset
