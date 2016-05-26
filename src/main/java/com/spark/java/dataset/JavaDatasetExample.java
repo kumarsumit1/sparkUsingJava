@@ -1,6 +1,8 @@
 package com.spark.java.dataset;
 
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.FilterFunction;
@@ -15,6 +17,7 @@ import com.spark.java.common.Functions;
 import com.spark.java.common.JavaData;
 import com.spark.java.common.JavaPerson;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,8 +26,11 @@ import java.util.Set;
  * @author sumit.kumar
  *
  */
-public class JavaDatasetExample {
+public class JavaDatasetExample implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	transient static Logger rootLogger = LogManager.getLogger("myLogger");
+	
     public static void main(String[] args) throws Exception {
 
         SparkConf sparkConf = new SparkConf()

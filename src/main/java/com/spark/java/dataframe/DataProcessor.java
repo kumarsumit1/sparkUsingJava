@@ -1,6 +1,9 @@
 package com.spark.java.dataframe;
 
+import java.io.Serializable;
+
 import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -10,9 +13,11 @@ import org.apache.spark.sql.expressions.Window;
 import org.apache.spark.sql.expressions.WindowSpec;
 
 
-public class DataProcessor {
+public class DataProcessor implements Serializable {
 
 
+	private static final long serialVersionUID = 1L;
+	transient static Logger rootLogger = LogManager.getLogger("myLogger");
 	public static void main(String[] args) {
 		Logger.getLogger("org").setLevel(Level.ERROR);
 	    Logger.getLogger("akka").setLevel(Level.ERROR);
